@@ -4,6 +4,8 @@
 //elemento HTML5 (<canvas>) que permite dibujar 
 //Canvas es mas bien una hoja de papel 
 const canvas = document.getElementById("canvas-principal");
+
+
 //Recuperar la estructura <html>
 
 const contexto = canvas.getContext("2d");
@@ -14,13 +16,15 @@ const contexto = canvas.getContext("2d");
 let posicionInicialX;
 let posicionInicialY;
 
-const dibujar = (cursorX,cursorY) => {
-      contexto.beginPath();
+function dibujar(cursorX,cursorY) {
+      contexto.beginPath();// "inicia" un nuevo trazo con el pincel
       contexto.moveTo(posicionInicialX,posicionInicialY);
-      contexto.lineWith = 30;//Grosor de la linea del pincel
-      contexto.strokeStyle = "red";//Color de la linea del pincel
-      //context.lineCap = "round" ; 
-      //context.lineJoin = "round" ;
+      contexto.lineWidth = parseInt(document.getElementById("grosor").value*0.9);//Grosor de la linea del pincel
+      console.log(parseInt(document.getElementById("grosor").value));
+
+      contexto.strokeStyle = document.getElementById("color").value;//Color de la linea del pincel
+      contexto.lineCap = "round" ; 
+      contexto.lineJoin = "round" ;
       contexto.lineTo(cursorX,cursorY);//
       contexto.stroke();
 
@@ -29,18 +33,21 @@ const dibujar = (cursorX,cursorY) => {
 
 };
 
-const mouseDown = (evt) => {
+function mouseDown (evt)  {
+
       posicionInicialX = evt.offsetX;
       posicionInicialY = evt.offsetY;
       dibujar(posicionInicialX,posicionInicialY);
       canvas.addEventListener("mousemove",mouseMoving);
+
+      
 };
 
-const mouseMoving = (evt) =>{
+ function mouseMoving (evt) {
       dibujar(evt.offsetX,evt.offsetY);
 };
 
-const mouseUp = () => {
+ function mouseUp ()  {
       canvas.removeEventListener("mousemove",mouseMoving);
 };
 
