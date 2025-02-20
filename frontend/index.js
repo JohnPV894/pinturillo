@@ -3,53 +3,49 @@
 //Que es un canvas?
 //elemento HTML5 (<canvas>) que permite dibujar 
 //Canvas es mas bien una hoja de papel 
-const canvas = document.getElementById("canvas-principal");
-
-
+const HTML_CANVAS = document.getElementById("canvas-principal");
 //Recuperar la estructura <html>
 
-const contexto = canvas.getContext("2d");
+const contexto = HTML_CANVAS.getContext("2d");
 //el contexto es mas bien una caja de herramientas para pintar en esa hoja
 
-
-
-let posicionInicialX;
-let posicionInicialY;
+let inicial_posicionX_pincel;
+let inicial_posicionY_pincel;
 
 function dibujar(cursorX,cursorY) {
-      contexto.beginPath();// "inicia" un nuevo trazo con el pincel
-      contexto.moveTo(posicionInicialX,posicionInicialY);
-      contexto.lineWidth = parseInt(document.getElementById("grosor").value*0.9);//Grosor de la linea del pincel
-      console.log(parseInt(document.getElementById("grosor").value));
-
+      contexto.lineWidth = parseInt(document.getElementById("grosor").value*0.5);//Grosor de la linea del pincel
       contexto.strokeStyle = document.getElementById("color").value;//Color de la linea del pincel
-      contexto.lineCap = "round" ; 
-      contexto.lineJoin = "round" ;
-      contexto.lineTo(cursorX,cursorY);//
-      contexto.stroke();
+      contexto.lineCap="round";//Redondea los extremos del trazo (cabeza y cola)
+      contexto.lineJoin = "round";//Redondea los cambios de direccion del trazo 
 
-      posicionInicialX = cursorX;
-      posicionInicialY = cursorY;
+      contexto.beginPath();// "inicia" un nuevo trazo con el pincel
+      contexto.moveTo(inicial_posicionX_pincel,inicial_posicionY_pincel);//Mover el pincel a esa posicion especifica
+      contexto.lineTo(cursorX,cursorY);//"Traza" una linea desde La posicion X,Y de moveTo hasta la de lineTo
+      contexto.stroke();//Dibuja/Pinta la linea trazada desde MoveTo hasta LineTo
+
+      inicial_posicionX_pincel = cursorX;
+      inicial_posicionY_pincel = cursorY;
+      
 
 };
 
-function mouseDown (evt)  {
-
-      posicionInicialX = evt.offsetX;
-      posicionInicialY = evt.offsetY;
-      dibujar(posicionInicialX,posicionInicialY);
-      canvas.addEventListener("mousemove",mouseMoving);
+function mouseDown (cursor)  {
+      //Obtener posicion actual cursor
+      inicial_posicionX_pincel = cursor.offsetX;
+      inicial_posicionY_pincel = cursor.offsetY;
+      dibujar(inicial_posicionX_pincel,inicial_posicionY_pincel);
+      HTML_CANVAS.addEventListener("mousemove",mouseMoving);
 
       
 };
 
- function mouseMoving (evt) {
+function mouseMoving (evt) {
       dibujar(evt.offsetX,evt.offsetY);
 };
 
- function mouseUp ()  {
-      canvas.removeEventListener("mousemove",mouseMoving);
+function mouseUp ()  {
+      HTML_CANVAS.removeEventListener("mousemove",mouseMoving);
 };
 
-canvas.addEventListener("mousedown",mouseDown);
-canvas.addEventListener("mouseup", mouseUp);
+HTML_CANVAS.addEventListener("mousedown",mouseDown);
+HTML_CANVAS.addEventListener("mouseup", mouseUp);

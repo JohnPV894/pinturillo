@@ -5,17 +5,27 @@
       <meta http-equiv="X-UA">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link rel="stylesheet" href="styleIndex.css">
-      <title>Document</title>
+      <title>Pinturillo</title>
 </head>
 <body>
-      <div class="main-container">
+      <div class="contenedor-principal">
 
-            <h4 style="cursor: crosshair">crosshair</h4>
+            
+            <div class="pizarra">
+                  <span>
+                        <input type="color" name="" id="color">
+                        <input type="range" name="" id="grosor">
+                        <input type="button" value="->">
+                        <input type="button" value='<-'>
+                  </span>
+                  <canvas id="canvas-principal" width="900" height="900"></canvas>
+            </div>
+            
+            <div class="chat">
 
-            <canvas id="canvas-principal" width="900" height="900"></canvas>
-            <div>
-                  <input type="color" name="" id="color">
-                  <input type="range" name="" id="grosor">
+                  <span>
+                  <input type="text" name="" id="mensaje"> <input type="submit" value="Enviar" id="">
+                  </span>
             </div>
       </div>
       <script src="index.js"></script>

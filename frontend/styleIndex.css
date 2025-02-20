@@ -1,10 +1,11 @@
 body{
       margin:0;
-      padding: 0;
+      padding:0;
 }
 
-.main-container{
-      background-color: rgb(229, 175, 229);
+.contenedor-principal{
+      background: url("img/tableroCorchos.jpg");
+      background-size: cover;
       height: 100vh;
       display: flex;
       justify-content: center;
@@ -13,7 +14,20 @@ body{
 
 #canvas-principal{
       background-color: aliceblue;
-      width: 850px;
-      height: 850px;
+      width: 800px;
+      height: 700px;
       cursor: crosshair;
+}
+/**/
+.pizarra{
+      display: flex;
+      flex-direction: column;
+}
+.pizarra span{
+      display: flex;
+      width: 100%;
+      background: rgb(255, 255, 75);
+}
+.pizarra span input{
+      margin: 15px 15px;
 }
